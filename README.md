@@ -1,6 +1,6 @@
 # PawPal+ (Module 2 Project)
 
-You are building **PawPal+**, a Streamlit app that helps a pet owner plan care tasks for their pet.
+You are building ** reamlit app that helps a pet owner plan care tasks for their pet.
 
 ## Scenario
 
@@ -41,3 +41,41 @@ pip install -r requirements.txt
 5. Add tests to verify key behaviors.
 6. Connect your logic to the Streamlit UI in `app.py`.
 7. Refine UML so it matches what you actually built.
+
+
+
+A Streamlit app that helps pet owners plan and track daily care tasks across multiple pets.
+Features
+
+Add an owner profile with daily time budget and preferred care windows
+Register multiple pets and assign tasks with priority, duration, and frequency
+Generate a prioritized daily schedule that respects the owner's time constraints
+Mark tasks complete directly from the schedule view
+
+
+Smarter Scheduling
+
+Three algorithmic features were added in Phase 3 to make the scheduler more
+robust and realistic.
+Recurring tasks
+Tasks with a frequency of "daily" or "weekly" automatically re-queue
+themselves when completed. Calling pet.complete_task(task_id) marks the
+current task done and appends a fresh copy with its due_date set to
+today + 1 day (daily) or today + 7 days (weekly), calculated using
+Python's timedelta. Tasks marked "as_needed" are completed and removed
+with no recurrence.
+Conflict detection
+Scheduler.detect_conflicts() scans the generated plan for overlapping time
+slots using the standard interval-overlap test:
+slot A and slot B overlap when: A.start < B.end AND B.start < A.end
+All times are compared as integer minutes to keep the logic simple. The method
+never raises an exception — it always returns a list of plain-English warning
+strings so the UI or CLI can display them gracefully.
+Sorting and filtering
+Two utility methods give callers flexible access to the generated plan:
+
+sort_by_time() — returns the plan sorted chronologically by start time,
+regardless of the priority order it was generated in.
+filter_tasks(completed, pet_name) — returns a filtered subset of the plan
+by completion status, pet name, or both combined. The original plan is never
+mutated.
