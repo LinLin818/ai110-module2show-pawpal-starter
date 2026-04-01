@@ -238,3 +238,6 @@ Accepting AI output without reading it carefully introduced subtle bugs (like
 the in-place sort mutation). The skill is not in prompting AI to write code;
 it is in knowing enough to evaluate what it writes.
 
+<a href="/course_images/ai110/pawpal_demo.png" target="_blank">
+  <img src="/course_images/ai110/pawpal_demo.png" alt="PawPal+ app" width="600"/>
+</a>
